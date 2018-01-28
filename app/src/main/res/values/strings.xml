@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Notely</string>
+    <string name="checkInternetConnection">No internet connection.</string>
+    <string name="add_new">Add New</string>
+    <string name="filter_note">Filter Note</string>
+    <string name="undo">Undo</string>
+    <string name="save">Save</string>
+</resources>

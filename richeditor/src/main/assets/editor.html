@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="user-scalable=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="normalize.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="div-title" class="editor" contenteditable="true" >
+    <H1 id="h1-title"> </H1>
+</div>
+<div id="div-editor" class="editor" contenteditable="true">
+
+</div>
+<script type="text/javascript" src="rich_editor.js"></script>
+</body>
+<script>
+    function handleTitleInput(e){
+        if(e.keyCode == 13){
+            RE.editor.focus();
+            e.preventDefault();
+        }else if(e.keyCode == 8 && document.getElementById("h1-title").innerText.trim().length == 0){
+            e.preventDefault();
+        }else if(!RE.title_init){
+            RE.title_init = true;
+            RE.title_element.innerText = e.data;
+            RE.title_element.className = "title-editor";
+            e.preventDefault();
+            var sel = window.getSelection();
+            sel.collapse(RE.title_editor.childNodes[1], 1)
+            RE.title_editor.onclick = null;
+        }
+
+        if(!RE.title_init){
+            e.preventDefault();
+        }
+    }
+    document.getElementById("div-title").addEventListener("input", handleTitleInput);
+
+    window.onload = function(){
+    if(!RE.title_init)
+        RE.title_element.innerText = "Title...";
+        RE.title_element.className = "placeholder";
+        RE.title_editor.onclick = function(){
+            var sel = window.getSelection();
+            sel.collapse(RE.title_editor.childNodes[1], 0)
+        }
+    };
+
+
+</script>
+</html>

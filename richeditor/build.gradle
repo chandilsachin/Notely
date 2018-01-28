@@ -1,0 +1,24 @@
+apply plugin: 'com.android.library'
+//apply plugin: 'com.novoda.bintray-release'
+
+android {
+  compileSdkVersion 27
+  buildToolsVersion "27.0.2"
+  defaultConfig {
+    minSdkVersion 19
+    targetSdkVersion 27
+    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+  }
+}
+
+/*publish {
+  userOrg = POM_DEVELOPER_ID
+  groupId = GROUP
+  artifactId = ARTIFACT_ID
+  publishVersion = VERSION_NAME
+  desc = POM_DESCRIPTION
+  website = POM_URL
+  bintrayUser = BINTRAY_USER
+  bintrayKey = BINTRAY_API_KEY
+  autoPublish = false
+}*/
