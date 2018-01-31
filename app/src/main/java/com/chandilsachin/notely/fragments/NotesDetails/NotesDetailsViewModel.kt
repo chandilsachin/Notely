@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModel
 import com.chandilsachin.notely.dagger.MyApplication
 import com.chandilsachin.personal_finance.database.LocalRepo
 import com.chandilsachin.personal_finance.database.entities.Note
+import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 
 /**
@@ -26,6 +27,7 @@ class NotesDetailsViewModel : ViewModel() {
 
     fun getNote(noteId: Long) {
         localRepo.getNote(noteId)
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ note ->
                     noteLiveData.value = note
                 }, { it.printStackTrace() })

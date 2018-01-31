@@ -4,13 +4,15 @@ import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.arch.persistence.room.TypeConverters
 import android.content.Context
+import com.chandilsachin.notely.database.entities.StarredNotes
+import com.chandilsachin.personal_finance.database.entities.FavoriteNote
 import com.chandilsachin.personal_finance.database.entities.Note
 
 /**
  * Created by sachin on 22/5/17.
  */
 
-@Database(entities = arrayOf(Note::class),
+@Database(entities = arrayOf(Note::class, FavoriteNote::class, StarredNotes::class),
         version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class NoteDatabase : RoomDatabase(){

@@ -42,10 +42,12 @@ RE.callback = function() {
 }
 
 RE.setTitle = function(title){
-    if(title.length() > 0){
-        RE.title_element.innerHTML = title;
+    if(title.length > 0){
+        RE.title_element.innerHTML = decodeURIComponent(title.replace(/\+/g, '%20'));
         RE.title_init = true;
+        RE.title_element.className = "title-editor"
     }
+    RE.title_editor.onclick = null;
 }
 
 RE.getTitle = function(){
@@ -324,6 +326,7 @@ RE.removeFormat = function() {
 
 // Event Listeners
 RE.editor.addEventListener("input", RE.callback);
+RE.title_editor.addEventListener("input", RE.callback);
 RE.editor.addEventListener("keyup", function(e) {
     var KEY_LEFT = 37, KEY_RIGHT = 39;
     if (e.which == KEY_LEFT || e.which == KEY_RIGHT) {

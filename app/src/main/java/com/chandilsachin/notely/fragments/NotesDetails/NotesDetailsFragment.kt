@@ -39,7 +39,7 @@ class NotesDetailsFragment : LifeCycleFragment() {
                 richEditorNote.undo();
             }
             R.id.menu_item_save -> {
-                val note = Note(richEditorNote.title, richEditorNote.html)
+                val note = Note(richEditorNote.title.trim(), richEditorNote.html.trim())
                 if(noteId != null && noteId != -1L){
                     note.noteId = noteId as Long
                 }
@@ -59,6 +59,7 @@ class NotesDetailsFragment : LifeCycleFragment() {
         setDisplayHomeAsUpEnabled(true);
 
         richEditorNote.setEditorFontSize(22)
+
     }
 
     override fun initLoadViews() {

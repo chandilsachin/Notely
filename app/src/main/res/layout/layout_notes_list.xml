@@ -12,11 +12,77 @@
         <include layout="@layout/toolbar_layout" />
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v7.widget.RecyclerView
+    <com.chandilsachin.notely.util.MyDrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <!-- The main content view -->
+        <FrameLayout
+            android:id="@+id/content_frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    </android.support.v7.widget.RecyclerView>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvNotesList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </android.support.v7.widget.RecyclerView>
+
+        </FrameLayout>
+        <!-- The navigation drawer -->
+        <RelativeLayout
+            android:id="@+id/navigation"
+            android:layout_width="170dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:clickable="true"
+            android:background="#555555">
+
+            <RelativeLayout
+                android:id="@+id/relativeNavigationHeader"
+                android:layout_width="match_parent"
+                android:layout_alignParentTop="true"
+                android:padding="10dp"
+                android:layout_height="80dp">
+
+                <ImageView
+                    android:id="@+id/ivFilterCancel"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    app:srcCompat="@drawable/ic_clear_24dp" />
+
+                <TextView
+                    android:id="@+id/tvFilterTitle"
+                    style="@style/navigation.label.deselected"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:text="@string/filter"
+                    android:layout_centerVertical="true"
+                    android:layout_toStartOf="@id/ivFilterCancel" />
+
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/buttonApply"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:text="@string/apply" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvNavigation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/relativeNavigationHeader"
+                android:layout_above="@id/buttonApply" />
+
+        </RelativeLayout>
+    </com.chandilsachin.notely.util.MyDrawerLayout>
+
 
 </android.support.design.widget.CoordinatorLayout>

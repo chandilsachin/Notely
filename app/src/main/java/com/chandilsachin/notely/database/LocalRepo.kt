@@ -1,6 +1,9 @@
 package com.chandilsachin.personal_finance.database
 
+import android.arch.lifecycle.LiveData
 import com.chandilsachin.notely.dagger.MyApplication
+import com.chandilsachin.notely.database.entities.StarredNotes
+import com.chandilsachin.personal_finance.database.entities.FavoriteNote
 import com.chandilsachin.personal_finance.database.entities.Note
 import io.reactivex.Flowable
 import io.reactivex.Single
@@ -44,11 +47,59 @@ class LocalRepo {
         }.subscribeOn(Schedulers.computation())
     }
 
-    fun getAllNotes(fetchedCount: Int): Flowable<ArrayList<Note>> {
-        return dao.queryAll(/*fetchedCount*/).subscribeOn(Schedulers.computation()).map { ArrayList(it) }
+    fun getAllNotes(): Single<List<Note>> {
+        return dao.queryAll()
+    }
+
+    fun getAllNotesFavoriteStarred(): Single<List<Note>> {
+        return dao.queryAllFavoriteStarred()
+    }
+
+    fun getAllNotesFavorite(): Single<List<Note>> {
+        return dao.queryAllFavorite()
+    }
+
+    fun getAllNotesStarred(): Single<List<Note>> {
+        return dao.queryAllStarred()
     }
 
     fun getNote(noteId: Long): Flowable<Note> {
         return dao.query(noteId).subscribeOn(Schedulers.computation())
+    }
+
+    fun doFavorite(favoriteNote: FavoriteNote): Single<Boolean> {
+        return Single.create<Boolean> {
+            dao.insert(favoriteNote)
+            it.onSuccess(true)
+        }.subscribeOn(Schedulers.io())
+    }
+
+    fun isFavorite(noteId: Long): Single<Boolean> {
+        return dao.isFavorite(noteId).subscribeOn(Schedulers.io())
+    }
+
+    fun removeFavorite(favoriteNote: FavoriteNote): Single<Boolean> {
+        return Single.create<Boolean> {
+            dao.delete(favoriteNote)
+            it.onSuccess(false)
+        }.subscribeOn(Schedulers.io())
+    }
+
+    fun doStar(starredNote: StarredNotes): Single<Boolean> {
+        return Single.create<Boolean> {
+            dao.insert(starredNote)
+            it.onSuccess(true)
+        }.subscribeOn(Schedulers.io())
+    }
+
+    fun isStar(noteId: Long): Single<Boolean> {
+        return dao.isStarred(noteId).subscribeOn(Schedulers.io())
+    }
+
+    fun removeStar(starredNote: StarredNotes): Single<Boolean> {
+        return Single.create<Boolean> {
+            dao.delete(starredNote)
+            it.onSuccess(false)
+        }.subscribeOn(Schedulers.io())
     }
 }

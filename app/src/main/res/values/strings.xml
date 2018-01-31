@@ -5,4 +5,15 @@
     <string name="filter_note">Filter Note</string>
     <string name="undo">Undo</string>
     <string name="save">Save</string>
+    <string name="starred">Starred</string>
+    <string name="favorite">Favorite</string>
+    <string name="apply">Apply</string>
+    <string name="filter">FILTER</string>
+    <string name="delete">Delete</string>
+
+
+    <string-array name="navigationMenuItems">
+        <item>Hearted</item>
+        <item>Favourite</item>
+    </string-array>
 </resources>
