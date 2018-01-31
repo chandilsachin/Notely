@@ -28,16 +28,16 @@ interface NoteDao {
     fun delete(note: Note): Int
 
     @Query("SELECT * FROM ${Constants.TABLE_NOTES} ORDER BY ${Constants.TIMESTAMP} DESC")
-    fun queryAll():Single<List<Note>>
+    fun queryAll():Flowable<List<Note>>
 
     @Query("select * from ${Constants.TABLE_NOTES} nl where nl.${Constants.NOTE_ID} in (select fn.${Constants.NOTE_ID} from FavoriteNote fn) or nl.${Constants.NOTE_ID} in (select fn.${Constants.NOTE_ID} from StarredNotes fn) ORDER BY ${Constants.TIMESTAMP} DESC")
-    fun queryAllFavoriteStarred(): Single<List<Note>>
+    fun queryAllFavoriteStarred(): Flowable<List<Note>>
 
     @Query("select * from ${Constants.TABLE_NOTES} nl where nl.${Constants.NOTE_ID} in (select fn.${Constants.NOTE_ID} from FavoriteNote fn) ORDER BY ${Constants.TIMESTAMP} DESC")
-    fun queryAllFavorite(): Single<List<Note>>
+    fun queryAllFavorite(): Flowable<List<Note>>
 
     @Query("select * from ${Constants.TABLE_NOTES} nl where nl.${Constants.NOTE_ID} in (select fn.${Constants.NOTE_ID} from StarredNotes fn) ORDER BY ${Constants.TIMESTAMP} DESC")
-    fun queryAllStarred(): Single<List<Note>>
+    fun queryAllStarred(): Flowable<List<Note>>
 
     @Query("SELECT * FROM ${Constants.TABLE_NOTES} WHERE ${Constants.NOTE_ID}=:arg0")
     fun query(expenseId: Long):Flowable<Note>

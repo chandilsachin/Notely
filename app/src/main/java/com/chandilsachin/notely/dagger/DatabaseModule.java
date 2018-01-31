@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.chandilsachin.personal_finance.database.NoteDao;
 import com.chandilsachin.personal_finance.database.NoteDatabase;
-import com.chandilsachin.personal_finance.database.LocalRepo;
+import com.chandilsachin.notely.database.LocalRepo;
 import com.chandilsachin.personal_finance.database.Preferences;
 
 import dagger.Module;

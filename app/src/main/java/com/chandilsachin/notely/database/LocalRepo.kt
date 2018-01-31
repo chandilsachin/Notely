@@ -1,8 +1,8 @@
-package com.chandilsachin.personal_finance.database
+package com.chandilsachin.notely.database
 
-import android.arch.lifecycle.LiveData
 import com.chandilsachin.notely.dagger.MyApplication
 import com.chandilsachin.notely.database.entities.StarredNotes
+import com.chandilsachin.personal_finance.database.NoteDao
 import com.chandilsachin.personal_finance.database.entities.FavoriteNote
 import com.chandilsachin.personal_finance.database.entities.Note
 import io.reactivex.Flowable
@@ -47,19 +47,19 @@ class LocalRepo {
         }.subscribeOn(Schedulers.computation())
     }
 
-    fun getAllNotes(): Single<List<Note>> {
+    fun getAllNotes(): Flowable<List<Note>> {
         return dao.queryAll()
     }
 
-    fun getAllNotesFavoriteStarred(): Single<List<Note>> {
+    fun getAllNotesFavoriteStarred(): Flowable<List<Note>> {
         return dao.queryAllFavoriteStarred()
     }
 
-    fun getAllNotesFavorite(): Single<List<Note>> {
+    fun getAllNotesFavorite(): Flowable<List<Note>> {
         return dao.queryAllFavorite()
     }
 
-    fun getAllNotesStarred(): Single<List<Note>> {
+    fun getAllNotesStarred(): Flowable<List<Note>> {
         return dao.queryAllStarred()
     }
 

@@ -69,13 +69,16 @@ class NotesListFragment : LifeCycleFragment() {
     override fun initLoadViews() {
 
         mViewModel.noteLiveData.observe(this, listObserver)
-        mViewModel.getNotes()
+        compositeDisposable.add(mViewModel.getNotes())
     }
 
     var listObserver = Observer<List<Note>> {
         it?.let {
             if (it.isNotEmpty()) {
                 mAdapter?.list = it
+                mAdapter?.notifyDataSetChanged()
+            }else{
+                mAdapter?.list = emptyList()
                 mAdapter?.notifyDataSetChanged()
             }
         }
@@ -101,13 +104,13 @@ class NotesListFragment : LifeCycleFragment() {
             toggleNavigationBar()
             mNavigationListAdapter?.selectedItems?.clear()
             mNavigationListAdapter?.notifyDataSetChanged()
-            mViewModel.getNotesFavoriteStarred(mNavigationListAdapter?.selectedItems?.contains(0)?:false,
-                    mNavigationListAdapter?.selectedItems?.contains(1)?:false)
+            compositeDisposable.clear()
+            compositeDisposable.add(mViewModel.getNotesFavoriteStarred(false, false))
         }
         buttonApply.setOnClickListener {
             drawer_layout.closeDrawer(Gravity.END)
-            mViewModel.getNotesFavoriteStarred(mNavigationListAdapter?.selectedItems?.contains(0)?:false,
-                    mNavigationListAdapter?.selectedItems?.contains(1)?:false)
+            compositeDisposable.add(mViewModel.getNotesFavoriteStarred(mNavigationListAdapter?.selectedItems?.contains(0)?:false,
+                    mNavigationListAdapter?.selectedItems?.contains(1)?:false))
         }
         mAdapter?.onDeleteItemClickListener = {
             mViewModel.deleteNote(it)

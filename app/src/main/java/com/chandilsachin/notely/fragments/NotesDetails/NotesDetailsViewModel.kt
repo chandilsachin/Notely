@@ -3,7 +3,7 @@ package com.chandilsachin.notely.fragments.NotesDetails
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import com.chandilsachin.notely.dagger.MyApplication
-import com.chandilsachin.personal_finance.database.LocalRepo
+import com.chandilsachin.notely.database.LocalRepo
 import com.chandilsachin.personal_finance.database.entities.Note
 import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject

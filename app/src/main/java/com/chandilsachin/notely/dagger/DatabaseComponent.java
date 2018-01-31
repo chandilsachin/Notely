@@ -3,7 +3,7 @@ package com.chandilsachin.notely.dagger;
 
 import com.chandilsachin.notely.fragments.NotesDetails.NotesDetailsViewModel;
 import com.chandilsachin.notely.fragments.NotesList.NotesListViewModel;
-import com.chandilsachin.personal_finance.database.LocalRepo;
+import com.chandilsachin.notely.database.LocalRepo;
 
 import javax.inject.Singleton;
 

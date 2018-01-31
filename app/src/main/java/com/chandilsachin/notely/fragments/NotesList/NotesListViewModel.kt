@@ -4,11 +4,12 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import com.chandilsachin.notely.dagger.MyApplication
 import com.chandilsachin.notely.database.entities.StarredNotes
-import com.chandilsachin.personal_finance.database.LocalRepo
+import com.chandilsachin.notely.database.LocalRepo
 import com.chandilsachin.personal_finance.database.entities.FavoriteNote
 import com.chandilsachin.personal_finance.database.entities.Note
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
@@ -25,8 +26,8 @@ class NotesListViewModel : ViewModel() {
         MyApplication.component.inject(this)
     }
 
-    fun getNotes() {
-        localRepo.getAllNotes()
+    fun getNotes(): Disposable {
+        return localRepo.getAllNotes()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
@@ -34,7 +35,7 @@ class NotesListViewModel : ViewModel() {
                 },{it.printStackTrace()})
     }
 
-    fun getNotesFavoriteStarred(favorite: Boolean, starred: Boolean) {
+    fun getNotesFavoriteStarred(favorite: Boolean, starred: Boolean):Disposable {
         val single = if (favorite && starred)
             localRepo.getAllNotesFavoriteStarred()
         else if (favorite)
@@ -44,7 +45,7 @@ class NotesListViewModel : ViewModel() {
         else
             localRepo.getAllNotes()
 
-        single.subscribeOn(Schedulers.io())
+        return single.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     noteLiveData.value = it

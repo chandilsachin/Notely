@@ -37,7 +37,7 @@
 
         <android.support.constraint.ConstraintLayout
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/linearLayout"
+            android:id="@+id/list_item_container"
             android:layout_width="match_parent"
             android:layout_height="120dp">
 

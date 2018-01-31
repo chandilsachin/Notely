@@ -41,7 +41,7 @@ class NotesListAdapter(context: Context?, var list: List<Note>) : RecyclerView.A
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         holder?.bind(getItem(position))
-        holder?.itemView?.linearLayout?.setOnClickListener { onItemClickListener(getItem(position)) }
+        holder?.itemView?.list_item_container?.setOnClickListener { onItemClickListener(getItem(position)) }
     }
 
     inner class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
@@ -75,6 +75,7 @@ class NotesListAdapter(context: Context?, var list: List<Note>) : RecyclerView.A
                         }, {})
                 ivDelete.setOnClickListener {
                     onDeleteItemClickListener(note)
+                    slListItem.close(false)
                 }
             }
         }
