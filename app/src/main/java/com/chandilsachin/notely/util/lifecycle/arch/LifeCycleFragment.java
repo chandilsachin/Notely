@@ -84,6 +84,10 @@ public abstract class LifeCycleFragment extends Fragment {
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
 
+    public void showToast(int message) {
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
     @Override
     public void onStop() {
         super.onStop();

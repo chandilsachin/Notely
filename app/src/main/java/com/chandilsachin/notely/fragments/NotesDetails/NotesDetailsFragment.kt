@@ -39,9 +39,18 @@ class NotesDetailsFragment : LifeCycleFragment() {
                 richEditorNote.undo();
             }
             R.id.menu_item_save -> {
+                if(richEditorNote.title == null)
+                    richEditorNote.title = ""
+                if(richEditorNote.html == null)
+                    richEditorNote.html = ""
+
                 val note = Note(richEditorNote.title.trim(), richEditorNote.html.trim())
                 if(noteId != null && noteId != -1L){
                     note.noteId = noteId as Long
+                }
+                if(note.title.length < 1 && note.noteText.length < 1) {
+                    showToast(R.string.emptyNoteMessage)
+                    return true;
                 }
                 mViewModel.addNote(note)
                 activity?.onBackPressed()
@@ -59,7 +68,7 @@ class NotesDetailsFragment : LifeCycleFragment() {
         setDisplayHomeAsUpEnabled(true);
 
         richEditorNote.setEditorFontSize(22)
-
+        richEditorNote.setEditorHeight(200)
     }
 
     override fun initLoadViews() {

@@ -10,7 +10,7 @@
     <string name="apply">Apply</string>
     <string name="filter">FILTER</string>
     <string name="delete">Delete</string>
-
+    <string name="emptyNoteMessage">Empty note can\'t be saved.</string>
 
     <string-array name="navigationMenuItems">
         <item>Hearted</item>

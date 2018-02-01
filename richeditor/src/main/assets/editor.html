@@ -17,14 +17,24 @@
 </body>
 <script>
     function handleTitleInput(e){
-        if(e.keyCode == 13){
+        if(e.inputType == "insertParagraph"){
             RE.editor.focus();
             e.preventDefault();
-        }else if(e.keyCode == 8 && document.getElementById("h1-title").innerText.trim().length == 0){
+        }else if(e.inputType == "deleteContentBackward" && document.getElementById("h1-title").innerText.trim().length == 0){
             e.preventDefault();
         }else if(!RE.title_init){
             RE.title_init = true;
-            RE.title_element.innerText = e.data;
+            if(e.keyCode == 229){
+                RE.title_element.innerText = RE.title_element.innerText.charAt(0);
+            }
+            else if(typeof(e.data).toLowerCase() == "undefined"){
+                if(typeof(e.key).toLowerCase() == "undefined"){
+                    RE.title_element.innerText = "";
+                }else
+                    RE.title_element.innerText = e.key;
+            }else
+                RE.title_element.innerText = e.data;
+
             RE.title_element.className = "title-editor";
             e.preventDefault();
             var sel = window.getSelection();
@@ -37,6 +47,11 @@
         }
     }
     document.getElementById("div-title").addEventListener("input", handleTitleInput);
+    document.getElementById("div-title").addEventListener("keydown", function(e){
+        if(e.keyCode == 8 && document.getElementById("h1-title").innerText.trim().length == 0){
+            e.preventDefault();
+        }
+    });
 
     window.onload = function(){
     if(!RE.title_init)
