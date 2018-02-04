@@ -3,4 +3,8 @@
     <color name="colorPrimary">#F5F5F5</color>
     <color name="colorPrimaryDark">#DBDBDB</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="navigationFilterSelectedIconColor">#00C7A8</color>
+    <color name="toolBarIconTintColor">#000000</color>
+    <color name="noteListTimestampTextColor">#AAAAAA</color>
+    <color name="noteListDescTextColor">#777777</color>
 </resources>

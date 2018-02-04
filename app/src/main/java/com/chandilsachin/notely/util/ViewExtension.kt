@@ -9,6 +9,12 @@ import android.view.inputmethod.InputMethodManager
 import android.text.Html.FROM_HTML_MODE_LEGACY
 import android.text.Spanned
 import com.chandilsachin.notely.fragments.NotesList.NotesListAdapter
+import android.support.v4.graphics.drawable.DrawableCompat
+import android.graphics.drawable.Drawable
+import android.graphics.PorterDuff
+import android.support.annotation.ColorInt
+
+
 
 
 /**
@@ -27,4 +33,13 @@ fun RecyclerView.ViewHolder.fromHtml(html: String): Spanned {
         result = Html.fromHtml(html)
     }
     return result
+}
+
+fun setTintDrawable(drawable: Drawable, @ColorInt color: Int): Drawable {
+    drawable.clearColorFilter()
+    drawable.setColorFilter(color, PorterDuff.Mode.SRC_IN)
+    drawable.invalidateSelf()
+    val wrapDrawable = DrawableCompat.wrap(drawable).mutate()
+    DrawableCompat.setTint(wrapDrawable, color)
+    return wrapDrawable
 }

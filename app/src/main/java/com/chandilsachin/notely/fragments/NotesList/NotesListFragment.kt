@@ -4,10 +4,14 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
 import android.content.res.Configuration
+import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.v4.app.FragmentManager
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.view.*
+import com.ace.diettracker.util.setTintDrawable
 import com.chandilsachin.notely.MainActivityViewModel
 import com.chandilsachin.notely.R
 import com.chandilsachin.notely.fragments.NotesDetails.NotesDetailsFragment
@@ -28,6 +32,7 @@ class NotesListFragment : LifeCycleFragment() {
     val mViewModel: NotesListViewModel by lazy { initViewModel(NotesListViewModel::class.java) }
     var mAdapter: NotesListAdapter? = null
     var mNavigationListAdapter: NavigationListAdapter? = null
+    var mFilterApplied = false;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +42,14 @@ class NotesListFragment : LifeCycleFragment() {
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater?.inflate(R.menu.notes_list_menu, menu)
+        menu?.let {
+            val filterDrawable = menu.findItem(R.id.menu_item_filterNote)
+            if(mFilterApplied) {
+                setTintDrawable(filterDrawable.icon, ContextCompat.getColor(context!!, R.color.navigationFilterSelectedIconColor))
+            }else{
+                setTintDrawable(filterDrawable.icon, ContextCompat.getColor(context!!, R.color.toolBarIconTintColor))
+            }
+        }
 
     }
 
@@ -111,11 +124,15 @@ class NotesListFragment : LifeCycleFragment() {
             mNavigationListAdapter?.notifyDataSetChanged()
             compositeDisposable.clear()
             compositeDisposable.add(mViewModel.getNotesFavoriteStarred(false, false))
+            mFilterApplied = false
+            activity?.invalidateOptionsMenu()
         }
         buttonApply.setOnClickListener {
             drawer_layout.closeDrawer(Gravity.END)
             compositeDisposable.add(mViewModel.getNotesFavoriteStarred(mNavigationListAdapter?.selectedItems?.contains(0)?:false,
                     mNavigationListAdapter?.selectedItems?.contains(1)?:false))
+            mFilterApplied = true
+            activity?.invalidateOptionsMenu()
         }
         mAdapter?.onDeleteItemClickListener = {
             mViewModel.deleteNote(it)
