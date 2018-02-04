@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import com.chandilsachin.notely.R;
 
-import butterknife.ButterKnife;
 import io.reactivex.disposables.CompositeDisposable;
 
 public abstract class LifeCycleFragment extends Fragment {
@@ -27,7 +26,6 @@ public abstract class LifeCycleFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(getLayoutId(), container, false);
-        ButterKnife.bind(this, v);
         compositeDisposable = new CompositeDisposable();
         return v;
     }

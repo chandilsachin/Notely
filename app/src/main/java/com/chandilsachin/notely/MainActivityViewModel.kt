@@ -14,5 +14,6 @@ class MainActivityViewModel : ViewModel() {
 
         const val FRAGMENT_LIST = 1;
         const val FRAGMENT_DETAILS = 2;
+        const val FRAGMENT_PREVIEW = 3;
     }
 }

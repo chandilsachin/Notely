@@ -11,6 +11,7 @@
     <string name="filter">FILTER</string>
     <string name="delete">Delete</string>
     <string name="emptyNoteMessage">Empty note can\'t be saved.</string>
+    <string name="edit">Edit</string>
 
     <string-array name="navigationMenuItems">
         <item>Hearted</item>

@@ -40,6 +40,28 @@
             android:layout_width="match_parent"
             android:layout_height="120dp">
 
+
+
+            <ImageView
+                android:id="@+id/imageViewFavorite"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="15dp"
+                app:srcCompat="@drawable/ic_favorite_selected_24dp" />
+
+            <ImageView
+                android:id="@+id/imageViewStar"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginBottom="24dp"
+                android:layout_marginEnd="16dp"
+                app:srcCompat="@drawable/ic_star_selected_24dp" />
+
+
             <TextView
                 android:id="@+id/textViewTitle"
                 style="@style/list_item.title"
@@ -49,6 +71,9 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="10dp"
+                android:layout_toLeftOf="@id/imageViewFavorite"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:text="TextView" />
 
             <TextView
@@ -59,6 +84,9 @@
                 android:layout_alignParentStart="true"
                 android:layout_below="@id/textViewTitle"
                 android:layout_marginEnd="8dp"
+                android:maxLines="1"
+                android:layout_toLeftOf="@id/imageViewStar"
+                android:ellipsize="end"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="8dp"
                 android:text="TextView" />
@@ -70,29 +98,11 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_below="@id/textViewDescription"
+                android:layout_toLeftOf="@id/imageViewStar"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="8dp"
                 android:text="TextView" />
-
-            <ImageView
-                android:id="@+id/imageViewFavorite"
-                android:layout_width="wrap_content"
-                android:layout_height="32dp"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="16dp"
-                app:srcCompat="@drawable/ic_favorite_selected_24dp" />
-
-            <ImageView
-                android:id="@+id/imageViewStar"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_alignParentEnd="true"
-                android:layout_marginBottom="24dp"
-                android:layout_marginEnd="16dp"
-                android:layout_alignParentBottom="true"
-                app:srcCompat="@drawable/ic_star_selected_24dp" />
 
         </RelativeLayout>
         <!--<android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"

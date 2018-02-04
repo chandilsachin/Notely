@@ -17,6 +17,7 @@ class NotesDetailsViewModel : ViewModel() {
     @Inject
     lateinit var localRepo: LocalRepo;
     val noteLiveData = MutableLiveData<Note>()
+    var note_savedIntance: Note? = null
 
     init {
         MyApplication.component.inject(this)

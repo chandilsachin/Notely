@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.AppCompatEditText
 import android.support.v7.widget.Toolbar
 import com.chandilsachin.notely.R
 
@@ -51,4 +52,6 @@ fun Fragment.setDisplayHomeAsUpEnabled(value: Boolean) {
 fun Fragment.getAppCompactActivity(): AppCompatActivity {
     return activity as AppCompatActivity
 }
+
+
 

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.Window
 import android.view.animation.AccelerateDecelerateInterpolator
 import com.chandilsachin.notely.fragments.NotesDetails.NotesDetailsFragment
+import com.chandilsachin.notely.fragments.NotesDetails.NotesPreviewFragment
 import com.chandilsachin.notely.fragments.NotesList.NotesListFragment
 import com.chandilsachin.notely.util.AnimatorAdapter
 import com.chandilsachin.notely.util.loadFragment
@@ -34,6 +35,12 @@ class MainActivity : AppCompatActivity() {
                 fragment = NotesDetailsFragment.newInstance(-1)
             }
             loadFragment(R.id.fragmentContainer, fragment, this, false, NotesDetailsFragment.TAG)
+        } else if (MainActivityViewModel.loadedFragment == MainActivityViewModel.FRAGMENT_PREVIEW) {
+            var fragment = supportFragmentManager.findFragmentByTag(NotesPreviewFragment.TAG)
+            if (fragment == null) {
+                fragment = NotesPreviewFragment.newInstance(-1)
+            }
+            loadFragment(R.id.fragmentContainer, fragment, this, false, NotesPreviewFragment.TAG)
         } else
             loadFragment(R.id.fragmentContainer, NotesListFragment.newInstance(), NotesDetailsFragment.TAG)
 

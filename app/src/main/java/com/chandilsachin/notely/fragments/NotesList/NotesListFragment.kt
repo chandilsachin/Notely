@@ -1,13 +1,7 @@
 package com.chandilsachin.notely.fragments.NotesList
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
-import android.content.res.Configuration
-import android.graphics.Color
-import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.support.v4.app.FragmentManager
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.view.*
@@ -15,13 +9,13 @@ import com.ace.diettracker.util.setTintDrawable
 import com.chandilsachin.notely.MainActivityViewModel
 import com.chandilsachin.notely.R
 import com.chandilsachin.notely.fragments.NotesDetails.NotesDetailsFragment
+import com.chandilsachin.notely.fragments.NotesDetails.NotesPreviewFragment
 import com.chandilsachin.notely.util.initViewModel
 import com.chandilsachin.notely.util.lifecycle.arch.LifeCycleFragment
 import com.chandilsachin.notely.util.loadFragmentSlideUp
 import com.chandilsachin.personal_finance.database.entities.Note
 import kotlinx.android.synthetic.main.layout_notes_list.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
-import java.util.*
 
 /**
  * Created by sachin on 27/1/18.
@@ -104,7 +98,7 @@ class NotesListFragment : LifeCycleFragment() {
 
     override fun setUpEvents() {
         mAdapter?.onItemClickListener = {
-            loadFragmentSlideUp(R.id.fragmentContainer, NotesDetailsFragment.newInstance(it.noteId), NotesDetailsFragment.TAG)
+            loadFragmentSlideUp(R.id.fragmentContainer, NotesPreviewFragment.newInstance(it.noteId), NotesPreviewFragment.TAG)
         }
         mAdapter?.onFavoriteClickListener = {
             mViewModel.toggleFavorite(it.noteId)
