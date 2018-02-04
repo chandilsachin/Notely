@@ -6,7 +6,7 @@ A simple app to make and manage notes.
 
 This app is made in Kotlin language with all of the best practices suggested in Google IO/2017 using ViewModels.
 
-This app is design in MVVM pattern.
+This app is designed with MVVM pattern.
 
 Unit tests written in Robolectric.
 
@@ -17,7 +17,6 @@ Unit tests written in Robolectric.
 1. RxJava2
 1. Retrofit
 1. Dagger2 
-1. ButterKnife
 1. JUnit
 1. Robolectric
 1. PowerMockito
