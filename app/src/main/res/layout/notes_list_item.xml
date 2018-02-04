@@ -9,8 +9,8 @@
         android:id="@+id/slListItem"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:mode="same_level"
-        app:dragEdge="right">
+        app:dragEdge="right"
+        app:mode="same_level">
 
         <RelativeLayout
             android:layout_width="70dp"
@@ -21,22 +21,81 @@
                 android:id="@+id/ivDelete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
                 android:layout_centerHorizontal="true"
+                android:layout_marginTop="40dp"
                 app:srcCompat="@drawable/ic_delete_white_24dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/ivDelete"
-                android:textColor="#FFFFFF"
                 android:layout_centerHorizontal="true"
-                android:text="@string/delete" />
+                android:text="@string/delete"
+                android:textColor="#FFFFFF" />
 
         </RelativeLayout>
 
-        <android.support.constraint.ConstraintLayout
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+        <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/list_item_container"
+            android:layout_width="match_parent"
+            android:layout_height="120dp">
+
+            <TextView
+                android:id="@+id/textViewTitle"
+                style="@style/list_item.title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="10dp"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/textViewDescription"
+                style="@style/list_item.short_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@id/textViewTitle"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/textViewTimestamp"
+                style="@style/list_item.time_stamp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@id/textViewDescription"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:text="TextView" />
+
+            <ImageView
+                android:id="@+id/imageViewFavorite"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="16dp"
+                app:srcCompat="@drawable/ic_favorite_selected_24dp" />
+
+            <ImageView
+                android:id="@+id/imageViewStar"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginBottom="24dp"
+                android:layout_marginEnd="16dp"
+                android:layout_alignParentBottom="true"
+                app:srcCompat="@drawable/ic_star_selected_24dp" />
+
+        </RelativeLayout>
+        <!--<android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/list_item_container"
             android:layout_width="match_parent"
             android:layout_height="120dp">
@@ -50,7 +109,7 @@
                 android:layout_marginStart="24dp"
                 android:text="TextView"
                 app:layout_constraintBottom_toTopOf="@+id/textViewDescription"
-                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintEnd_toStartOf="@+id/imageViewFavorite"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_chainStyle="packed" />
@@ -64,7 +123,7 @@
                 android:layout_marginTop="8dp"
                 android:text="TextView"
                 app:layout_constraintBottom_toTopOf="@+id/textViewTimestamp"
-                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintEnd_toStartOf="@+id/imageViewFavorite"
                 app:layout_constraintStart_toStartOf="@+id/textViewTitle"
                 app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
 
@@ -77,7 +136,7 @@
                 android:layout_marginTop="8dp"
                 android:text="TextView"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintEnd_toStartOf="@+id/imageView2"
                 app:layout_constraintStart_toStartOf="@+id/textViewTitle"
                 app:layout_constraintTop_toBottomOf="@+id/textViewDescription" />
 
@@ -86,10 +145,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginStart="0dp"
                 android:layout_marginTop="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/guideline2"
                 app:layout_constraintTop_toTopOf="@+id/textViewTitle"
                 app:srcCompat="@drawable/ic_favorite_selected_24dp" />
 
@@ -99,23 +156,12 @@
                 android:layout_height="32dp"
                 android:layout_marginBottom="0dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginStart="0dp"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewTimestamp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/guideline2"
                 app:srcCompat="@drawable/ic_star_selected_24dp" />
 
-            <android.support.constraint.Guideline
-                android:id="@+id/guideline2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="51dp"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintGuide_begin="326dp" />
-
         </android.support.constraint.ConstraintLayout>
-
+-->
     </com.chauthai.swipereveallayout.SwipeRevealLayout>
 
 

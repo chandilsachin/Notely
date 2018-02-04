@@ -19,6 +19,7 @@ abstract class NoteDatabase : RoomDatabase(){
     abstract fun foodDao(): NoteDao
 
     companion object{
+        @JvmStatic
         var TEST_MODE = false
         private val databaseName = "expense"
 

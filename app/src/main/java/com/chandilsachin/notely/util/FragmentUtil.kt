@@ -15,25 +15,25 @@ fun <T : ViewModel> Fragment.initViewModel(c: Class<T>): T {
     return model
 }
 
-fun Fragment.loadFragment(containerId: Int, fragment: Fragment) {
-    loadFragment(containerId, fragment, activity as AppCompatActivity)
+fun Fragment.loadFragment(containerId: Int, fragment: Fragment, tag: String) {
+    loadFragment(containerId, fragment, activity as AppCompatActivity, tag)
 }
 
-fun Fragment.loadFragmentSlideUp(containerId: Int, fragment: Fragment) {
+fun Fragment.loadFragmentSlideUp(containerId: Int, fragment: Fragment, tag: String) {
     activity!!.supportFragmentManager.beginTransaction()
             .setCustomAnimations(R.anim.slide_in_up, R.anim.slide_out_up,
                     R.anim.slide_out_down, R.anim.slide_in_down)
-            .replace(containerId, fragment)
+            .replace(containerId, fragment, tag)
             .addToBackStack(null).commit()
 }
 
-fun loadFragment(containerId: Int, fragment: Fragment, activity: AppCompatActivity) {
-    loadFragment(containerId, fragment, activity, true)
+fun loadFragment(containerId: Int, fragment: Fragment, activity: AppCompatActivity, tag: String) {
+    loadFragment(containerId, fragment, activity, true, tag)
 }
 
-fun loadFragment(containerId: Int, fragment: Fragment, activity: AppCompatActivity, addToBackStack: Boolean) {
+fun loadFragment(containerId: Int, fragment: Fragment, activity: AppCompatActivity, addToBackStack: Boolean, tag: String) {
     val transaction = activity.supportFragmentManager.beginTransaction()
-    transaction.replace(containerId, fragment)
+    transaction.replace(containerId, fragment, tag)
     if (addToBackStack)
         transaction.addToBackStack(null)
     transaction.commit()

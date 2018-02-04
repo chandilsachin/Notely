@@ -24,4 +24,8 @@ public class MyApplication extends Application {
     public static DatabaseComponent getComponent() {
         return component;
     }
+
+    public static void setComponent(DatabaseComponent component) {
+        MyApplication.component = component;
+    }
 }

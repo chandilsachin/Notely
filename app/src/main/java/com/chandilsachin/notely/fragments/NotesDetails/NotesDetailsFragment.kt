@@ -2,9 +2,12 @@ package com.chandilsachin.notely.fragments.NotesDetails
 
 import android.arch.lifecycle.Observer
 import android.os.Bundle
+import android.support.v4.app.FragmentManager
 import android.view.*
+import com.chandilsachin.notely.MainActivityViewModel
 
 import com.chandilsachin.notely.R
+import com.chandilsachin.notely.fragments.NotesList.NotesListFragment
 import com.chandilsachin.notely.util.initViewModel
 import com.chandilsachin.notely.util.lifecycle.arch.LifeCycleFragment
 import com.chandilsachin.personal_finance.database.entities.Note
@@ -52,8 +55,9 @@ class NotesDetailsFragment : LifeCycleFragment() {
                     showToast(R.string.emptyNoteMessage)
                     return true;
                 }
-                mViewModel.addNote(note)
-                activity?.onBackPressed()
+                mViewModel.addNote(note).subscribe({
+                    activity?.onBackPressed()
+                },{})
             }
         }
         return super.onOptionsItemSelected(item)
@@ -69,6 +73,7 @@ class NotesDetailsFragment : LifeCycleFragment() {
 
         richEditorNote.setEditorFontSize(22)
         richEditorNote.setEditorHeight(200)
+        MainActivityViewModel.loadedFragment = MainActivityViewModel.FRAGMENT_DETAILS
     }
 
     override fun initLoadViews() {
@@ -85,7 +90,7 @@ class NotesDetailsFragment : LifeCycleFragment() {
     }
 
     companion object {
-
+        const val TAG: String = "NotesDetails"
         const val PARAM_NOTE_ID = "NOTE_ID"
 
         fun newInstance(noteId: Long): NotesDetailsFragment {
@@ -97,4 +102,10 @@ class NotesDetailsFragment : LifeCycleFragment() {
         }
     }
 
+    /*fun getInstance(supportFragmentManager: FragmentManager): NotesDetailsFragment {
+        var fragment = supportFragmentManager.findFragmentByTag(NotesDetailsFragment.TAG)
+        if(fragment == null)
+            fragment = NotesDetailsFragment.newInstance()
+        return fragment as NotesDetailsFragment
+    }*/
 }

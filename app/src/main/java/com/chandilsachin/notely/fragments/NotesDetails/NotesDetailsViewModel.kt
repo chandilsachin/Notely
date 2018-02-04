@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModel
 import com.chandilsachin.notely.dagger.MyApplication
 import com.chandilsachin.notely.database.LocalRepo
 import com.chandilsachin.personal_finance.database.entities.Note
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 
@@ -21,8 +22,8 @@ class NotesDetailsViewModel : ViewModel() {
         MyApplication.component.inject(this)
     }
 
-    fun addNote(note: Note) {
-        localRepo.addNote(note).subscribe()
+    fun addNote(note: Note): Single<Boolean> {
+        return localRepo.addNote(note)
     }
 
     fun getNote(noteId: Long) {

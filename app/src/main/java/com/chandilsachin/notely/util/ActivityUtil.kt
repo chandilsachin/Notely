@@ -14,8 +14,8 @@ fun <T:ViewModel> AppCompatActivity.initViewModel(c:Class<T>):T{
     return model
 }
 
-fun AppCompatActivity.loadFragment(containerId:Int, fragment:Fragment){
-    loadFragment(containerId, fragment, this)
+fun AppCompatActivity.loadFragment(containerId:Int, fragment:Fragment, tag: String){
+    loadFragment(containerId, fragment, this, tag)
 }
 
 fun AppCompatActivity.showToast(message:String){

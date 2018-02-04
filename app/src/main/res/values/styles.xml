@@ -25,13 +25,13 @@
     <style name="list_item.short_desc" parent="Base.TextAppearance.AppCompat.Small">
         <item name="android:textSize">15sp</item>
         <item name="android:textStyle">normal</item>
-        <item name="android:textColor">#AAAAAA</item>
+        <item name="android:textColor">#777777</item>
     </style>
 
     <style name="list_item.time_stamp" parent="Base.TextAppearance.AppCompat.Small">
         <item name="android:textSize">13sp</item>
         <item name="android:textStyle">normal</item>
-        <item name="android:textColor">#DDDDDD</item>
+        <item name="android:textColor">#AAAAAA</item>
     </style>
 
     <style name="navigation.label.deselected" parent="Base.TextAppearance.AppCompat.Small">

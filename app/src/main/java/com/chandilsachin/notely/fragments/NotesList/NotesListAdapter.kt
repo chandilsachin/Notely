@@ -1,5 +1,6 @@
 package com.chandilsachin.notely.fragments.NotesList
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.text.format.DateUtils
@@ -28,10 +29,8 @@ class NotesListAdapter(context: Context?, var list: List<Note>) : RecyclerView.A
     var isStarred: (note: Note) -> Single<Boolean> = { Single.create { } }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
-        val viewHolder = ViewHolder(inflater.inflate(R.layout.notes_list_item, null, false))
+        val viewHolder = ViewHolder(inflater.inflate(R.layout.notes_list_item, parent, false))
 
-        val lp = RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-        viewHolder.itemView.setLayoutParams(lp)
         return viewHolder
     }
 
@@ -45,12 +44,13 @@ class NotesListAdapter(context: Context?, var list: List<Note>) : RecyclerView.A
     }
 
     inner class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
+        @SuppressLint("SetTextI18n")
         fun bind(note: Note) {
             itemView.apply {
                 textViewTitle.text = fromHtml(note.title)
                 textViewDescription.text = fromHtml(note.noteText.trim())
-                textViewTimestamp.text = DateUtils.formatDateRange(context, note.timestamp.time,
-                        System.currentTimeMillis(), DateUtils.FORMAT_SHOW_TIME)
+                textViewTimestamp.text = "${DateUtils.getRelativeDateTimeString(context, note.timestamp.time,
+                        DateUtils.MINUTE_IN_MILLIS, DateUtils.DAY_IN_MILLIS, DateUtils.FORMAT_SHOW_TIME)}"
 
                 imageViewFavorite.setOnClickListener {
                     onFavoriteClickListener(note).observeOn(AndroidSchedulers.mainThread())
@@ -59,10 +59,10 @@ class NotesListAdapter(context: Context?, var list: List<Note>) : RecyclerView.A
                             }, { it.printStackTrace() })
                 }
 
-                imageView2.setOnClickListener {
+                imageViewStar.setOnClickListener {
                     onStarClickListener(note).observeOn(AndroidSchedulers.mainThread())
                             .subscribe({
-                                initStarredViews(it, imageView2)
+                                initStarredViews(it, imageViewStar)
                             }, { it.printStackTrace() })
                 }
                 isFavorite(note).observeOn(AndroidSchedulers.mainThread())
@@ -71,7 +71,7 @@ class NotesListAdapter(context: Context?, var list: List<Note>) : RecyclerView.A
                         }, {})
                 isStarred(note).observeOn(AndroidSchedulers.mainThread())
                         .subscribe({
-                            initStarredViews(it, imageView2)
+                            initStarredViews(it, imageViewStar)
                         }, {})
                 ivDelete.setOnClickListener {
                     onDeleteItemClickListener(note)

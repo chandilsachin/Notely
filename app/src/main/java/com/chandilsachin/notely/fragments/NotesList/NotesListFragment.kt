@@ -3,9 +3,12 @@ package com.chandilsachin.notely.fragments.NotesList
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
+import android.content.res.Configuration
 import android.os.Bundle
+import android.support.v4.app.FragmentManager
 import android.support.v7.widget.LinearLayoutManager
 import android.view.*
+import com.chandilsachin.notely.MainActivityViewModel
 import com.chandilsachin.notely.R
 import com.chandilsachin.notely.fragments.NotesDetails.NotesDetailsFragment
 import com.chandilsachin.notely.util.initViewModel
@@ -29,6 +32,7 @@ class NotesListFragment : LifeCycleFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -39,7 +43,7 @@ class NotesListFragment : LifeCycleFragment() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.menu_item_addNewNote -> {
-                loadFragmentSlideUp(R.id.fragmentContainer, NotesDetailsFragment.newInstance(-1))
+                loadFragmentSlideUp(R.id.fragmentContainer, NotesDetailsFragment.newInstance(-1), NotesDetailsFragment.TAG)
             }
             R.id.menu_item_filterNote -> {
                 toggleNavigationBar()
@@ -64,6 +68,7 @@ class NotesListFragment : LifeCycleFragment() {
                 resources.getStringArray(R.array.navigationMenuItems).asList())
         rvNavigation.layoutManager = LinearLayoutManager(context)
         rvNavigation.adapter = mNavigationListAdapter
+        MainActivityViewModel.loadedFragment = MainActivityViewModel.FRAGMENT_LIST
     }
 
     override fun initLoadViews() {
@@ -86,7 +91,7 @@ class NotesListFragment : LifeCycleFragment() {
 
     override fun setUpEvents() {
         mAdapter?.onItemClickListener = {
-            loadFragmentSlideUp(R.id.fragmentContainer, NotesDetailsFragment.newInstance(it.noteId))
+            loadFragmentSlideUp(R.id.fragmentContainer, NotesDetailsFragment.newInstance(it.noteId), NotesDetailsFragment.TAG)
         }
         mAdapter?.onFavoriteClickListener = {
             mViewModel.toggleFavorite(it.noteId)
@@ -126,10 +131,19 @@ class NotesListFragment : LifeCycleFragment() {
 
     companion object {
 
+        const val TAG: String = "NotesList"
+
         fun newInstance(): NotesListFragment {
             val fragment = NotesListFragment()
             return fragment
         }
+
+        /*fun getInstance(supportFragmentManager: FragmentManager): NotesListFragment {
+            var fragment = supportFragmentManager.findFragmentByTag(TAG)
+            if(fragment == null)
+                fragment = newInstance()
+            return fragment as NotesListFragment
+        }*/
     }
 
 }
