@@ -22,7 +22,16 @@ class NoteDaoImpl: NoteDao{
         private var favoriteDb = HashMap<Int, FavoriteNote>()
         private var starredDb = HashMap<Int, StarredNotes>()
         private  var idCount = 0
+
+        fun flush(){
+            db.clear()
+            favoriteDb.clear()
+            starredDb.clear()
+            idCount = 0
+        }
     }
+
+
 
     override fun insert(note: Note): Long {
         note.noteId = idCount++.toLong()

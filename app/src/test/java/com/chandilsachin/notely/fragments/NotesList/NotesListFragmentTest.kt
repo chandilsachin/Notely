@@ -10,6 +10,7 @@ import com.chandilsachin.notely.R
 import com.chandilsachin.notely.dagger.AppContext
 import com.chandilsachin.notely.dagger.DaggerDatabaseComponent
 import com.chandilsachin.notely.dagger.MyApplication
+import com.chandilsachin.notely.fragments.NoteDaoImpl
 import com.chandilsachin.notely.fragments.NotesDetails.NotesDetailsFragment
 import com.chandilsachin.notely.fragments.TestDatabaseModule
 import com.chandilsachin.notely.util.TestUtilFunctions
@@ -70,6 +71,7 @@ class NotesListFragmentTest {
 
     @Test
     fun test_make_a_note() {
+        NoteDaoImpl.flush()
         var listFragment = NotesListFragment()
         SupportFragmentTestUtil.startVisibleFragment(listFragment, MainActivity::class.java, R.id.fragmentContainer)
         assertEquals(listFragment.rvNotesList.childCount, 0)
@@ -92,6 +94,7 @@ class NotesListFragmentTest {
 
     @Test
     fun test_do_star_bookmark_apply_filter() {
+        NoteDaoImpl.flush()
         var listFragment = NotesListFragment()
         SupportFragmentTestUtil.startVisibleFragment(listFragment, MainActivity::class.java, R.id.fragmentContainer)
         assertEquals(listFragment.rvNotesList.childCount, 0)
