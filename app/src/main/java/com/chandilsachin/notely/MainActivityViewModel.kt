@@ -7,7 +7,7 @@ import android.arch.lifecycle.ViewModel
  */
 class MainActivityViewModel : ViewModel() {
 
-
+    var firstLoad = true
 
     companion object {
         var loadedFragment: Int = -1;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayoutMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.chandilsachin.notely.MainActivity">
@@ -10,6 +10,22 @@
         android:id="@+id/fragmentContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frameSplashScreen"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:background="@android:color/white"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageViewSplashImage"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:src="@mipmap/ic_splash_icon" />
 
     </FrameLayout>
 
